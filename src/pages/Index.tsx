@@ -10,7 +10,7 @@ const featuredProducts = [
     category: "Microcontrollers"
   },
   {
-    name: "Raspberry Pi 4",
+    name: "Raspberry Pi 4 Model B",
     price: 45.99,
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800",
     category: "Single Board Computers"
@@ -18,7 +18,25 @@ const featuredProducts = [
   {
     name: "Arduino Nano",
     price: 12.99,
-    image: "https://images.unsplash.com/photo-1553406830-ef2513450d76?auto=format&fit=crop&w=800",
+    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800",
+    category: "Microcontrollers"
+  },
+  {
+    name: "ESP32 Development Board",
+    price: 15.99,
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800",
+    category: "WiFi & Bluetooth"
+  },
+  {
+    name: "Raspberry Pi Pico",
+    price: 8.99,
+    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&w=800",
+    category: "Microcontrollers"
+  },
+  {
+    name: "Arduino Mega 2560",
+    price: 34.99,
+    image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc?auto=format&fit=crop&w=800",
     category: "Microcontrollers"
   },
 ];
@@ -35,13 +53,13 @@ const categories = [
     count: 89 
   },
   { 
-    name: "Sensors", 
-    icon: "https://images.unsplash.com/photo-1557858310-9052820906f7?auto=format&fit=crop&w=100", 
-    count: 45 
+    name: "Sensors & Modules", 
+    icon: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=100", 
+    count: 245 
   },
   { 
-    name: "Power Supply", 
-    icon: "https://images.unsplash.com/photo-1597225244660-1cd128c64284?auto=format&fit=crop&w=100", 
+    name: "Development Kits", 
+    icon: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=100", 
     count: 78 
   },
 ];
@@ -54,12 +72,17 @@ const Index = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-[#8B5CF6] to-secondary bg-clip-text text-transparent">
             Welcome to Nexus
           </h1>
-          <p className="text-xl text-muted max-w-2xl mx-auto">
-            Your one-stop shop for Arduino, Raspberry Pi, and all your electronic component needs.
+          <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
+            Your premier destination for Arduino, Raspberry Pi, and cutting-edge electronic components.
+            Build, create, and innovate with our extensive collection.
           </p>
+          <div className="flex justify-center gap-4">
+            <Button className="bg-primary hover:bg-primary/80">Shop Now</Button>
+            <Button variant="outline">View Deals</Button>
+          </div>
         </div>
       </section>
 
@@ -83,6 +106,42 @@ const Index = () => {
             {categories.map((category, index) => (
               <CategoryCard key={index} {...category} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Why Choose Us */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-12">Why Choose Nexus</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 bg-white/5 rounded-lg">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Quality Assured</h3>
+              <p className="text-muted">All our products are thoroughly tested and guaranteed authentic.</p>
+            </div>
+            <div className="p-6 bg-white/5 rounded-lg">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Fast Shipping</h3>
+              <p className="text-muted">Quick delivery with real-time tracking on all orders.</p>
+            </div>
+            <div className="p-6 bg-white/5 rounded-lg">
+              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Expert Support</h3>
+              <p className="text-muted">Technical assistance available 24/7 for all your queries.</p>
+            </div>
           </div>
         </div>
       </section>
