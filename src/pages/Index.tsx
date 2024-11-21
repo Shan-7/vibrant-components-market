@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
+import { Button } from "../components/ui/button";
 
 const featuredProducts = [
   {
