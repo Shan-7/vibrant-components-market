@@ -2,10 +2,29 @@ import { useCart } from "../context/CartContext";
 import { Button } from "../components/ui/button";
 import { Card } from "../components/ui/card";
 import Header from "../components/Header";
-import { Minus, Plus, Trash2 } from "lucide-react";
+import { Minus, Plus, Trash2, Save } from "lucide-react";
+import { useToast } from "../hooks/use-toast";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { items, removeFromCart, updateQuantity, total } = useCart();
+  const { toast } = useToast();
+
+  const handleQuantityUpdate = (id: string, newQuantity: number, stock: number = 10) => {
+    if (newQuantity > stock) {
+      toast({
+        title: "Stock limit reached",
+        description: `Sorry, only ${stock} items available`,
+        variant: "destructive",
+      });
+      return;
+    }
+    updateQuantity(id, Math.max(0, newQuantity));
+  };
+
+  const calculateSubtotal = (price: number, quantity: number) => {
+    return price * quantity;
+  };
 
   if (items.length === 0) {
     return (
@@ -14,6 +33,9 @@ const Cart = () => {
         <div className="container mx-auto px-4 pt-24">
           <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
           <p className="text-muted">Your cart is empty</p>
+          <Link to="/">
+            <Button className="mt-4">Continue Shopping</Button>
+          </Link>
         </div>
       </div>
     );
@@ -44,7 +66,7 @@ const Cart = () => {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => updateQuantity(item.id, Math.max(0, item.quantity - 1))}
+                        onClick={() => handleQuantityUpdate(item.id, item.quantity - 1)}
                       >
                         <Minus className="h-4 w-4" />
                       </Button>
@@ -52,7 +74,7 @@ const Cart = () => {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() => handleQuantityUpdate(item.id, item.quantity + 1)}
                       >
                         <Plus className="h-4 w-4" />
                       </Button>
@@ -63,7 +85,22 @@ const Cart = () => {
                       >
                         <Trash2 className="h-4 w-4" />
                       </Button>
+                      <Button
+                        variant="secondary"
+                        size="icon"
+                        onClick={() => {
+                          toast({
+                            title: "Saved for later",
+                            description: `${item.name} has been saved for later`,
+                          });
+                        }}
+                      >
+                        <Save className="h-4 w-4" />
+                      </Button>
                     </div>
+                    <p className="text-sm text-muted mt-2">
+                      Subtotal: ${calculateSubtotal(item.price, item.quantity).toFixed(2)}
+                    </p>
                   </div>
                 </div>
               </Card>
@@ -81,14 +118,20 @@ const Cart = () => {
                   <span>Shipping</span>
                   <span>Calculated at checkout</span>
                 </div>
+                <div className="flex justify-between">
+                  <span>Tax</span>
+                  <span>${(total * 0.1).toFixed(2)}</span>
+                </div>
                 <div className="border-t border-white/10 pt-2 mt-2">
                   <div className="flex justify-between font-bold">
                     <span>Total</span>
-                    <span>${total.toFixed(2)}</span>
+                    <span>${(total + (total * 0.1)).toFixed(2)}</span>
                   </div>
                 </div>
               </div>
-              <Button className="w-full mt-6">Proceed to Checkout</Button>
+              <Link to="/checkout">
+                <Button className="w-full mt-6">Proceed to Checkout</Button>
+              </Link>
             </Card>
           </div>
         </div>

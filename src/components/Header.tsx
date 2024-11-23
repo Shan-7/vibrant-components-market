@@ -1,11 +1,22 @@
-import { ShoppingCart, Menu } from "lucide-react";
+import { ShoppingCart, Menu, Search, Heart } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCart } from "../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Input } from "./ui/input";
+import { useState } from "react";
 
 const Header = () => {
   const { items } = useCart();
+  const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
   const cartItemsCount = items.reduce((sum, item) => sum + item.quantity, 0);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-white/10">
@@ -20,12 +31,33 @@ const Header = () => {
             </h1>
           </Link>
           <nav className="hidden md:flex gap-6">
-            <Link to="/" className="text-muted hover:text-white transition-colors">Components</Link>
-            <Link to="/" className="text-muted hover:text-white transition-colors">Categories</Link>
-            <Link to="/" className="text-muted hover:text-white transition-colors">Deals</Link>
+            <Link to="/components" className="text-muted hover:text-white transition-colors">Components</Link>
+            <Link to="/category/all" className="text-muted hover:text-white transition-colors">Categories</Link>
+            <Link to="/deals" className="text-muted hover:text-white transition-colors">Deals</Link>
           </nav>
         </div>
+        
+        <div className="hidden md:flex items-center gap-4 flex-1 max-w-xl mx-8">
+          <form onSubmit={handleSearch} className="flex-1 flex gap-2">
+            <Input
+              type="search"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="flex-1"
+            />
+            <Button type="submit" variant="secondary">
+              <Search className="w-4 h-4" />
+            </Button>
+          </form>
+        </div>
+
         <div className="flex items-center gap-4">
+          <Link to="/wishlist">
+            <Button variant="ghost" size="icon">
+              <Heart className="w-5 h-5" />
+            </Button>
+          </Link>
           <Link to="/cart">
             <Button variant="ghost" size="icon" className="relative">
               <ShoppingCart className="w-5 h-5" />

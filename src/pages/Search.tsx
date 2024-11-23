@@ -13,10 +13,11 @@ const Search = () => {
   const { data: searchResults } = useQuery({
     queryKey: ['search', searchQuery],
     queryFn: () => {
+      // Filter products based on name, description, or category
       return products.filter(product => 
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()))
+        product.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.category.toLowerCase().includes(searchQuery.toLowerCase())
       );
     },
     enabled: searchQuery.length > 0
@@ -50,6 +51,7 @@ const Search = () => {
                 price={product.price}
                 image={product.images[0]}
                 category={product.category}
+                product={product}
               />
             ))}
           </div>
