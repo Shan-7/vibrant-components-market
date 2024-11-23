@@ -2,6 +2,10 @@ import Header from "../components/Header";
 import ProductCard from "../components/ProductCard";
 import CategoryCard from "../components/CategoryCard";
 import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Search as SearchIcon } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const featuredProducts = [
   {
@@ -72,11 +76,19 @@ const categories = [
 ];
 
 const Index = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+  };
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
       
-      {/* Hero Section */}
+      {/* Hero Section with Search */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto text-center">
           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-[#8B5CF6] to-secondary bg-clip-text text-transparent">
@@ -84,22 +96,38 @@ const Index = () => {
           </h1>
           <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
             Your premier destination for Arduino, Raspberry Pi, and cutting-edge electronic components.
-            Build, create, and innovate with our extensive collection.
           </p>
-          <div className="flex justify-center gap-4">
-            <Button className="bg-primary hover:bg-primary/80">Shop Now</Button>
-            <Button variant="outline">View Deals</Button>
-          </div>
+          <form onSubmit={handleSearch} className="max-w-xl mx-auto flex gap-2 mb-8">
+            <Input
+              type="search"
+              placeholder="Search for products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-white/5"
+            />
+            <Button type="submit">
+              <SearchIcon className="w-4 h-4 mr-2" />
+              Search
+            </Button>
+          </form>
         </div>
       </section>
 
+      {/* Rest of the sections */}
       {/* Featured Products */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredProducts.map((product) => (
-              <ProductCard key={product.id} {...product} />
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                category={product.category}
+              />
             ))}
           </div>
         </div>
@@ -117,7 +145,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {/* Why Choose Us section */}
       <section className="py-16 px-4">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold mb-12">Why Choose Nexus</h2>

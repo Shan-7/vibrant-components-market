@@ -12,6 +12,8 @@ import CategoryProducts from "./pages/CategoryProducts";
 import Search from "./pages/Search";
 import Wishlist from "./pages/Wishlist";
 import Profile from "./pages/Profile";
+import OrderHistory from "./pages/OrderHistory";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -31,6 +33,8 @@ const App = () => (
               <Route path="/search" element={<Search />} />
               <Route path="/wishlist" element={<Wishlist />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/orders" element={<OrderHistory />} />
+              <Route path="/admin" element={<AdminDashboard />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
