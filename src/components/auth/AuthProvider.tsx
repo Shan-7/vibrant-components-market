@@ -1,6 +1,6 @@
 import { ClerkProvider } from "@clerk/clerk-react";
 
-const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || "pk_test_dummy-key-for-development";
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY || "pk_test_Z2l2ZW4tdGFwaXItOTkuY2xlcmsuYWNjb3VudHMuZGV2JA";
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   // In development, warn about missing Clerk key but don't break the app
