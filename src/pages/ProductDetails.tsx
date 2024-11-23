@@ -3,50 +3,21 @@ import Header from "../components/Header";
 import { Button } from "../components/ui/button";
 import { useCart } from "../context/CartContext";
 import { useToast } from "../components/ui/use-toast";
-import { ArrowLeft, ShoppingCart } from "lucide-react";
-
-const products = {
-  "1": {
-    id: "1",
-    name: "Arduino Uno R3",
-    price: 23.99,
-    image: "https://images.unsplash.com/photo-1608564697071-ddf911d81370?auto=format&fit=crop&w=800",
-    category: "Microcontrollers",
-    description: "The Arduino Uno R3 is a microcontroller board based on the ATmega328P. It has 14 digital input/output pins, 6 analog inputs, a 16 MHz ceramic resonator, a USB connection, a power jack, an ICSP header, and a reset button.",
-    specifications: [
-      "Operating Voltage: 5V",
-      "Input Voltage: 7-12V",
-      "Digital I/O Pins: 14",
-      "Analog Input Pins: 6",
-      "DC Current per I/O Pin: 20 mA",
-      "Flash Memory: 32 KB"
-    ]
-  },
-  "2": {
-    id: "2",
-    name: "Raspberry Pi 4 Model B",
-    price: 45.99,
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800",
-    category: "Single Board Computers",
-    description: "The Raspberry Pi 4 Model B is the latest product in the popular Raspberry Pi range of computers. It offers ground-breaking increases in processor speed, multimedia performance, memory, and connectivity compared to its predecessors.",
-    specifications: [
-      "Processor: Quad-core Cortex-A72",
-      "RAM: 4GB LPDDR4",
-      "Connectivity: 2.4 GHz and 5.0 GHz WiFi",
-      "Bluetooth: 5.0",
-      "USB Ports: 2 × USB 3.0 + 2 × USB 2.0",
-      "Video: 2 × micro HDMI"
-    ]
-  },
-  // Additional product definitions can be added here.
-};
+import { ArrowLeft, ShoppingCart, Download } from "lucide-react";
+import { products } from "../data/products";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../components/ui/tabs";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
   const { toast } = useToast();
   
-  const product = products[id as keyof typeof products];
+  const product = products.find(p => p.id === id);
 
   if (!product) {
     return (
@@ -60,7 +31,13 @@ const ProductDetails = () => {
   }
 
   const handleAddToCart = () => {
-    addToCart(product);
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      image: product.images[0],
+      category: product.category
+    });
     toast({
       title: "Added to cart",
       description: `${product.name} has been added to your cart.`,
@@ -76,27 +53,100 @@ const ProductDetails = () => {
           Back to Products
         </Link>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <img src={product.image} alt={product.name} className="w-full rounded-lg" />
+          <div className="space-y-4">
+            <img 
+              src={product.images[0]} 
+              alt={product.name} 
+              className="w-full rounded-lg"
+            />
+            {product.images.slice(1).map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`${product.name} view ${index + 2}`}
+                className="w-1/3 rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+              />
+            ))}
           </div>
           <div>
-            <span className="text-sm text-muted uppercase tracking-wider">{product.category}</span>
-            <h1 className="text-3xl font-bold mt-2">{product.name}</h1>
-            <p className="text-2xl font-bold text-primary mt-4">${product.price}</p>
-            <p className="text-muted mt-4">{product.description}</p>
-            <div className="mt-6">
-              <h2 className="text-xl font-semibold mb-4">Specifications</h2>
-              <ul className="space-y-2">
-                {product.specifications.map((spec, index) => (
-                  <li key={index} className="text-muted">{spec}</li>
-                ))}
-              </ul>
+            <div className="sticky top-24">
+              <span className="text-sm text-muted uppercase tracking-wider">{product.category}</span>
+              <h1 className="text-3xl font-bold mt-2">{product.name}</h1>
+              <p className="text-2xl font-bold text-primary mt-4">${product.price}</p>
+              
+              <div className="mt-4 space-y-2">
+                <p className="text-sm text-muted">SKU: {product.sku}</p>
+                <p className="text-sm text-muted">Manufacturer: {product.manufacturer}</p>
+                <p className={`text-sm ${product.stock > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                  {product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}
+                </p>
+              </div>
+
+              <p className="mt-6 text-muted">{product.description}</p>
+
+              <div className="mt-8 space-x-4">
+                <Button 
+                  className="w-full md:w-auto" 
+                  onClick={handleAddToCart}
+                  disabled={product.stock === 0}
+                >
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Add to Cart
+                </Button>
+                {product.datasheets && product.datasheets.length > 0 && (
+                  <Button variant="outline" className="w-full md:w-auto mt-4 md:mt-0">
+                    <Download className="w-4 h-4 mr-2" />
+                    Download Datasheet
+                  </Button>
+                )}
+              </div>
             </div>
-            <Button className="mt-8 w-full" onClick={handleAddToCart}>
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Add to Cart
-            </Button>
           </div>
+        </div>
+
+        <div className="mt-12">
+          <Tabs defaultValue="specs" className="w-full">
+            <TabsList>
+              <TabsTrigger value="specs">Technical Specifications</TabsTrigger>
+              <TabsTrigger value="dimensions">Dimensions & Weight</TabsTrigger>
+            </TabsList>
+            <TabsContent value="specs" className="mt-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {product.technicalSpecs.map((spec, index) => (
+                  <div key={index} className="flex justify-between p-4 bg-white/5 rounded-lg">
+                    <span className="text-muted">{spec.name}</span>
+                    <span className="font-medium">{spec.value}</span>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
+            <TabsContent value="dimensions" className="mt-6">
+              {product.dimensions ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="p-4 bg-white/5 rounded-lg">
+                    <p className="text-muted">Length</p>
+                    <p className="text-lg font-medium">{product.dimensions.length} mm</p>
+                  </div>
+                  <div className="p-4 bg-white/5 rounded-lg">
+                    <p className="text-muted">Width</p>
+                    <p className="text-lg font-medium">{product.dimensions.width} mm</p>
+                  </div>
+                  <div className="p-4 bg-white/5 rounded-lg">
+                    <p className="text-muted">Height</p>
+                    <p className="text-lg font-medium">{product.dimensions.height} mm</p>
+                  </div>
+                </div>
+              ) : (
+                <p className="text-muted">No dimension information available</p>
+              )}
+              {product.weight && (
+                <div className="mt-4 p-4 bg-white/5 rounded-lg">
+                  <p className="text-muted">Weight</p>
+                  <p className="text-lg font-medium">{product.weight} g</p>
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
