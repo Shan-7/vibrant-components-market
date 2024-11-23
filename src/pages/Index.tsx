@@ -91,7 +91,7 @@ const Index = () => {
       {/* Hero Section with Search */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-red-500 via-red-600 to-red-700 bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             Welcome to Brick Electronics
           </h1>
           <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
@@ -105,7 +105,7 @@ const Index = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="bg-white/5"
             />
-            <Button type="submit">
+            <Button type="submit" className="bg-primary hover:bg-primary/90">
               <SearchIcon className="w-4 h-4 mr-2" />
               Search
             </Button>
@@ -159,8 +159,8 @@ const Index = () => {
               <p className="text-muted">All our products are thoroughly tested and guaranteed authentic.</p>
             </div>
             <div className="p-6 bg-white/5 rounded-lg">
-              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-secondary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
@@ -168,8 +168,8 @@ const Index = () => {
               <p className="text-muted">Quick delivery with real-time tracking on all orders.</p>
             </div>
             <div className="p-6 bg-white/5 rounded-lg">
-              <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <svg className="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-12 h-12 bg-accent/20 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>

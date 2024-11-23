@@ -25,17 +25,21 @@ export default {
         background: "#1A1F2C",
         foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#9b87f5",
+          DEFAULT: "#0EA5E9",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#7E69AB",
+          DEFAULT: "#33C3F0",
           foreground: "#FFFFFF",
         },
         muted: {
           DEFAULT: "#8E9196",
           foreground: "#FFFFFF",
         },
+        accent: {
+          DEFAULT: "#F97316",
+          foreground: "#FFFFFF",
+        }
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
