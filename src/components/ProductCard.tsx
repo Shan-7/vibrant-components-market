@@ -29,7 +29,7 @@ const ProductCard = ({ id, name, price, image, category, product }: ProductCardP
   };
 
   return (
-    <Link to={`/product/${id}`}>
+    <Link to={`/product/${id}`} className="max-w-[280px]">
       <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group animate-fade-in">
         <div className="aspect-square overflow-hidden rounded-t-lg">
           <img
@@ -38,18 +38,18 @@ const ProductCard = ({ id, name, price, image, category, product }: ProductCardP
             className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
           />
         </div>
-        <div className="p-4">
+        <div className="p-3">
           <p className="text-xs text-muted uppercase tracking-wider">{category}</p>
-          <h3 className="text-lg font-semibold mt-1">{name}</h3>
-          <div className="flex items-center justify-between mt-4">
-            <p className="text-xl font-bold text-primary">${price}</p>
+          <h3 className="text-base font-semibold mt-1 line-clamp-1">{name}</h3>
+          <div className="flex items-center justify-between mt-3">
+            <p className="text-lg font-bold text-primary">${price}</p>
             <Button 
               size="sm" 
-              className="bg-primary hover:bg-primary/80" 
+              className="bg-primary hover:bg-primary/80 text-sm py-1" 
               onClick={handleAddToCart}
             >
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Add to Cart
+              <ShoppingCart className="w-3 h-3 mr-1" />
+              Add
             </Button>
           </div>
         </div>
