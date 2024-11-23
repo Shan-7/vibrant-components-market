@@ -23,12 +23,12 @@ const Header = () => {
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         <div className="flex items-center gap-8">
           <Link to="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-primary via-[#8B5CF6] to-secondary rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-2xl font-bold text-white font-mono transform -rotate-6">N</span>
-            </div>
-            <h1 className="text-2xl font-bold bg-gradient-to-r from-primary via-[#8B5CF6] to-secondary bg-clip-text text-transparent">
-              Nexus
-            </h1>
+            <img 
+              src="/brick-electronics-logo.png" 
+              alt="Brick Electronics" 
+              className="h-10 w-auto"
+            />
+            <span className="sr-only">Brick Electronics</span>
           </Link>
           <nav className="hidden md:flex gap-6">
             <Link to="/components" className="text-muted hover:text-white transition-colors">Components</Link>

@@ -91,8 +91,8 @@ const Index = () => {
       {/* Hero Section with Search */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-[#8B5CF6] to-secondary bg-clip-text text-transparent">
-            Welcome to Nexus
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-red-500 via-red-600 to-red-700 bg-clip-text text-transparent">
+            Welcome to Brick Electronics
           </h1>
           <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
             Your premier destination for Arduino, Raspberry Pi, and cutting-edge electronic components.
@@ -113,7 +113,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Rest of the sections */}
       {/* Featured Products */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
@@ -148,7 +147,7 @@ const Index = () => {
       {/* Why Choose Us section */}
       <section className="py-16 px-4">
         <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-12">Why Choose Nexus</h2>
+          <h2 className="text-3xl font-bold mb-12">Why Choose Brick Electronics</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="p-6 bg-white/5 rounded-lg">
               <div className="w-12 h-12 bg-primary/20 rounded-lg flex items-center justify-center mx-auto mb-4">
