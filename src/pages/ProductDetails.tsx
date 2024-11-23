@@ -2,8 +2,9 @@ import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header";
 import { Button } from "../components/ui/button";
 import { useCart } from "../context/CartContext";
-import { useToast } from "../components/ui/use-toast";
-import { ArrowLeft, ShoppingCart, Download } from "lucide-react";
+import { useWishlist } from "../context/WishlistContext";
+import { useToast } from "../hooks/use-toast";
+import { ArrowLeft, ShoppingCart, Download, Heart, ZoomIn, Star } from "lucide-react";
 import { products } from "../data/products";
 import {
   Tabs,
@@ -11,11 +12,17 @@ import {
   TabsList,
   TabsTrigger,
 } from "../components/ui/tabs";
+import { useState } from "react";
+import { Dialog, DialogContent } from "../components/ui/dialog";
+import { Badge } from "../components/ui/badge";
 
 const ProductDetails = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist();
   const { toast } = useToast();
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [isZoomOpen, setIsZoomOpen] = useState(false);
   
   const product = products.find(p => p.id === id);
 
@@ -44,6 +51,22 @@ const ProductDetails = () => {
     });
   };
 
+  const handleWishlist = () => {
+    if (isInWishlist(product.id)) {
+      removeFromWishlist(product.id);
+      toast({
+        title: "Removed from wishlist",
+        description: `${product.name} has been removed from your wishlist.`,
+      });
+    } else {
+      addToWishlist(product);
+      toast({
+        title: "Added to wishlist",
+        description: `${product.name} has been added to your wishlist.`,
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -54,31 +77,65 @@ const ProductDetails = () => {
         </Link>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-4">
-            <img 
-              src={product.images[0]} 
-              alt={product.name} 
-              className="w-full rounded-lg"
-            />
-            {product.images.slice(1).map((image, index) => (
-              <img
-                key={index}
-                src={image}
-                alt={`${product.name} view ${index + 2}`}
-                className="w-1/3 rounded-lg cursor-pointer hover:opacity-80 transition-opacity"
+            <div className="relative group">
+              <img 
+                src={product.images[selectedImage]} 
+                alt={product.name} 
+                className="w-full rounded-lg cursor-zoom-in"
+                onClick={() => setIsZoomOpen(true)}
               />
-            ))}
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
+                onClick={() => setIsZoomOpen(true)}
+              >
+                <ZoomIn className="w-5 h-5" />
+              </Button>
+            </div>
+            <div className="grid grid-cols-4 gap-2">
+              {product.images.map((image, index) => (
+                <img
+                  key={index}
+                  src={image}
+                  alt={`${product.name} view ${index + 1}`}
+                  className={`rounded-lg cursor-pointer hover:opacity-80 transition-opacity ${
+                    selectedImage === index ? 'ring-2 ring-primary' : ''
+                  }`}
+                  onClick={() => setSelectedImage(index)}
+                />
+              ))}
+            </div>
           </div>
           <div>
             <div className="sticky top-24">
-              <span className="text-sm text-muted uppercase tracking-wider">{product.category}</span>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-sm text-muted uppercase tracking-wider">{product.category}</span>
+                <Badge variant="secondary" className="ml-2">
+                  {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+                </Badge>
+              </div>
               <h1 className="text-3xl font-bold mt-2">{product.name}</h1>
+              <div className="flex items-center gap-2 mt-2">
+                <div className="flex">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star
+                      key={star}
+                      className={`w-4 h-4 ${
+                        star <= 4 ? 'text-yellow-400 fill-yellow-400' : 'text-gray-300'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-muted">(24 reviews)</span>
+              </div>
               <p className="text-2xl font-bold text-primary mt-4">${product.price}</p>
               
               <div className="mt-4 space-y-2">
                 <p className="text-sm text-muted">SKU: {product.sku}</p>
                 <p className="text-sm text-muted">Manufacturer: {product.manufacturer}</p>
                 <p className={`text-sm ${product.stock > 0 ? 'text-green-500' : 'text-red-500'}`}>
-                  {product.stock > 0 ? `In Stock (${product.stock} available)` : 'Out of Stock'}
+                  {product.stock > 0 ? `${product.stock} units available` : 'Out of Stock'}
                 </p>
               </div>
 
@@ -92,6 +149,14 @@ const ProductDetails = () => {
                 >
                   <ShoppingCart className="w-4 h-4 mr-2" />
                   Add to Cart
+                </Button>
+                <Button
+                  variant="outline"
+                  className="w-full md:w-auto mt-4 md:mt-0"
+                  onClick={handleWishlist}
+                >
+                  <Heart className={`w-4 h-4 mr-2 ${isInWishlist(product.id) ? 'fill-primary' : ''}`} />
+                  {isInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
                 </Button>
                 {product.datasheets && product.datasheets.length > 0 && (
                   <Button variant="outline" className="w-full md:w-auto mt-4 md:mt-0">
@@ -109,6 +174,7 @@ const ProductDetails = () => {
             <TabsList>
               <TabsTrigger value="specs">Technical Specifications</TabsTrigger>
               <TabsTrigger value="dimensions">Dimensions & Weight</TabsTrigger>
+              <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
             <TabsContent value="specs" className="mt-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -146,9 +212,28 @@ const ProductDetails = () => {
                 </div>
               )}
             </TabsContent>
+            <TabsContent value="reviews" className="mt-6">
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-lg font-semibold">Customer Reviews</h3>
+                  <Button>Write a Review</Button>
+                </div>
+                <p className="text-muted">No reviews yet. Be the first to review this product!</p>
+              </div>
+            </TabsContent>
           </Tabs>
         </div>
       </div>
+
+      <Dialog open={isZoomOpen} onOpenChange={setIsZoomOpen}>
+        <DialogContent className="max-w-4xl">
+          <img
+            src={product.images[selectedImage]}
+            alt={product.name}
+            className="w-full h-auto"
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from 'react';
 import { Product } from '../data/products';
-import { useToast } from '../components/ui/use-toast';
+import { useToast } from '../hooks/use-toast';
 
 interface WishlistContextType {
   wishlist: Product[];
