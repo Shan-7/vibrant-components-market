@@ -5,36 +5,42 @@ import { Button } from "../components/ui/button";
 
 const featuredProducts = [
   {
+    id: "1",
     name: "Arduino Uno R3",
     price: 23.99,
     image: "https://images.unsplash.com/photo-1608564697071-ddf911d81370?auto=format&fit=crop&w=800",
     category: "Microcontrollers"
   },
   {
+    id: "2",
     name: "Raspberry Pi 4 Model B",
     price: 45.99,
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800",
     category: "Single Board Computers"
   },
   {
+    id: "3",
     name: "Arduino Nano",
     price: 12.99,
     image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800",
     category: "Microcontrollers"
   },
   {
+    id: "4",
     name: "ESP32 Development Board",
     price: 15.99,
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800",
     category: "WiFi & Bluetooth"
   },
   {
+    id: "5",
     name: "Raspberry Pi Pico",
     price: 8.99,
     image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&w=800",
     category: "Microcontrollers"
   },
   {
+    id: "6",
     name: "Arduino Mega 2560",
     price: 34.99,
     image: "https://images.unsplash.com/photo-1487887235947-a955ef187fcc?auto=format&fit=crop&w=800",
@@ -92,8 +98,8 @@ const Index = () => {
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProducts.map((product, index) => (
-              <ProductCard key={index} {...product} />
+            {featuredProducts.map((product) => (
+              <ProductCard key={product.id} {...product} />
             ))}
           </div>
         </div>
