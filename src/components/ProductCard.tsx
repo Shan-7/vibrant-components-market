@@ -4,6 +4,7 @@ import { ShoppingCart } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { useToast } from "./ui/use-toast";
 import { Link } from "react-router-dom";
+import { Product } from "../data/products";
 
 interface ProductCardProps {
   id: string;
@@ -11,9 +12,10 @@ interface ProductCardProps {
   price: number;
   image: string;
   category: string;
+  product?: Product;
 }
 
-const ProductCard = ({ id, name, price, image, category }: ProductCardProps) => {
+const ProductCard = ({ id, name, price, image, category, product }: ProductCardProps) => {
   const { addToCart } = useCart();
   const { toast } = useToast();
 
