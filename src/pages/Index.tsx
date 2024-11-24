@@ -4,7 +4,7 @@ import CategoryCard from "../components/CategoryCard";
 import { NewsletterSignup } from "../components/marketing/NewsletterSignup";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
-import { Search as SearchIcon, Truck, Package, Users, Upload, Tool } from "lucide-react";
+import { Search as SearchIcon, Truck, Package, Users, Upload, Wrench } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ProjectCard } from "../components/projects/ProjectCard";
@@ -170,7 +170,7 @@ const Index = () => {
               <span>3D Printing</span>
             </Button>
             <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/kits")}>
-              <Tool className="w-8 h-8 mb-2" />
+              <Wrench className="w-8 h-8 mb-2" />
               <span>DIY Kits</span>
             </Button>
           </div>
@@ -178,7 +178,6 @@ const Index = () => {
       </section>
 
       {/* Featured Products Section */}
-      {/* Featured Products */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
@@ -198,7 +197,6 @@ const Index = () => {
       </section>
 
       {/* Categories Section */}
-      {/* Categories */}
       <section className="py-16 px-4 bg-white/5">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold mb-8">Browse Categories</h2>
