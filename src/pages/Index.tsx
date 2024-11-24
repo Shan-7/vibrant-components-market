@@ -115,30 +115,6 @@ const dummyProjects = [
   }
 ];
 
-const dummyKits = [
-  {
-    id: "kit1",
-    name: "Arduino Starter Kit",
-    price: 49.99,
-    image: "https://images.unsplash.com/photo-1608564697071-ddf911d81370?auto=format&fit=crop&w=800",
-    category: "Beginner"
-  },
-  {
-    id: "kit2",
-    name: "Robot Arm Kit",
-    price: 129.99,
-    image: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?auto=format&fit=crop&w=800",
-    category: "Robotics"
-  },
-  {
-    id: "kit3",
-    name: "Weather Station Kit",
-    price: 79.99,
-    image: "https://images.unsplash.com/photo-1483058712412-4245e9b90334?auto=format&fit=crop&w=800",
-    category: "IoT"
-  },
-];
-
 const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
@@ -155,7 +131,7 @@ const Index = () => {
       {/* Hero Section with Search */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6 text-primary">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#8B4513] via-[#A0522D] to-[#D2691E] bg-clip-text text-transparent">
             Welcome to Brick Electronics
           </h1>
           <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
@@ -189,38 +165,50 @@ const Index = () => {
               <Users className="w-8 h-8 mb-2" />
               <span>Careers</span>
             </Button>
-            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/kits")}>
-              <Upload className="w-8 h-8 mb-2" />
-              <span>DIY Kits</span>
-            </Button>
             <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/3d-printing")}>
-              <Wrench className="w-8 h-8 mb-2" />
+              <Upload className="w-8 h-8 mb-2" />
               <span>3D Printing</span>
+            </Button>
+            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/kits")}>
+              <Wrench className="w-8 h-8 mb-2" />
+              <span>DIY Kits</span>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* DIY Kits Section */}
+      {/* Featured Products Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-8">Popular DIY Kits</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {dummyKits.map((kit) => (
+          <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredProducts.map((product) => (
               <ProductCard
-                key={kit.id}
-                id={kit.id}
-                name={kit.name}
-                price={kit.price}
-                image={kit.image}
-                category={kit.category}
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                category={product.category}
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Section */}
+      {/* Categories Section */}
+      <section className="py-16 px-4 bg-white/5">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Browse Categories</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {categories.map((category, index) => (
+              <CategoryCard key={index} {...category} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Showcase */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
           <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>

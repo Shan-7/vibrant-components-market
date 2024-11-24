@@ -56,7 +56,7 @@ const Header = () => {
             <Link to="/components" className="text-muted hover:text-white transition-colors">Components</Link>
             <Link to="/category/all" className="text-muted hover:text-white transition-colors">Categories</Link>
             <Link to="/projects" className="text-muted hover:text-white transition-colors">Projects</Link>
-            <Link to="/kits" className="text-muted hover:text-white transition-colors">DIY Kits</Link>
+            <Link to="/3d-printing" className="text-muted hover:text-white transition-colors">3D Printing</Link>
           </nav>
         </div>
         
