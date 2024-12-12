@@ -25,42 +25,25 @@ export default {
         background: "#1A1F2C",
         foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#9b87f5",
+          DEFAULT: "#1EAEDB",
           foreground: "#FFFFFF",
-          hover: "#7E69AB",
+          hover: "#0FA0CE",
         },
         secondary: {
-          DEFAULT: "#0EA5E9",
+          DEFAULT: "#33C3F0",
           foreground: "#FFFFFF",
-          hover: "#33C3F0",
+          hover: "#D3E4FD",
         },
         muted: {
-          DEFAULT: "#8E9196",
+          DEFAULT: "#8A898C",
           foreground: "#FFFFFF",
           hover: "#C8C8C9",
-        },
-        accent: {
-          DEFAULT: "#F97316",
-          foreground: "#FFFFFF",
-          hover: "#FEC6A1",
-        },
-        success: {
-          DEFAULT: "#10B981",
-          foreground: "#FFFFFF",
-        },
-        warning: {
-          DEFAULT: "#F59E0B",
-          foreground: "#FFFFFF",
-        },
-        error: {
-          DEFAULT: "#EF4444",
-          foreground: "#FFFFFF",
         },
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(90deg, hsla(277, 75%, 84%, 1) 0%, hsla(297, 50%, 51%, 1) 100%)',
-        'gradient-secondary': 'linear-gradient(90deg, hsla(186, 33%, 94%, 1) 0%, hsla(216, 41%, 79%, 1) 100%)',
+        'gradient-primary': 'linear-gradient(90deg, #1EAEDB 0%, #33C3F0 100%)',
+        'gradient-secondary': 'linear-gradient(90deg, #33C3F0 0%, #D3E4FD 100%)',
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
