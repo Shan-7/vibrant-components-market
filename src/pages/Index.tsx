@@ -6,6 +6,7 @@ import { HeroSection } from "../components/hero/HeroSection";
 import { Package, Users, Upload, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import { ProjectCard } from "../components/projects/ProjectCard";
 
 const featuredProducts = [
   {
