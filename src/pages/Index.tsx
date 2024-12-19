@@ -131,7 +131,7 @@ const Index = () => {
       {/* Hero Section with Search */}
       <section className="pt-32 pb-16 px-4">
         <div className="container mx-auto text-center">
-          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#8B4513] via-[#A0522D] to-[#D2691E] bg-clip-text text-transparent">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#0EA5E9] via-[#33C3F0] to-[#0FA0CE] bg-clip-text text-transparent">
             Welcome to Brick Electronics
           </h1>
           <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
