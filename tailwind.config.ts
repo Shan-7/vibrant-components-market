@@ -22,17 +22,17 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "#1A1A2E",
+        background: "#1F1D36",
         foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#9D4EDD",
+          DEFAULT: "#FF6B6B",
           foreground: "#FFFFFF",
-          hover: "#7B2CBF",
+          hover: "#FF8E8E",
         },
         secondary: {
-          DEFAULT: "#C77DFF",
+          DEFAULT: "#FFB4B4",
           foreground: "#FFFFFF",
-          hover: "#E0AAFF",
+          hover: "#FFD1D1",
         },
         muted: {
           DEFAULT: "#8A898C",
@@ -42,8 +42,8 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(102.3deg, rgba(147,39,143,1) 5.9%, rgba(234,172,232,1) 64%)',
-        'gradient-secondary': 'linear-gradient(90deg, #9D4EDD 0%, #C77DFF 100%)',
+        'gradient-primary': 'linear-gradient(111.4deg, rgba(238,113,113,1) 1%, rgba(246,215,148,1) 58%)',
+        'gradient-secondary': 'linear-gradient(90deg, #FF6B6B 0%, #FFB4B4 100%)',
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
