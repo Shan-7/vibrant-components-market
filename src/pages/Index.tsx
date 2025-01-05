@@ -6,6 +6,9 @@ import { ThemeToggle } from "../components/theme/ThemeToggle";
 import ContactSection from "../components/contact/ContactSection";
 import { NewsletterSignup } from "../components/marketing/NewsletterSignup";
 import { ProjectCard } from "../components/projects/ProjectCard";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { Package, Users, Upload, Wrench } from "lucide-react";
 
 const featuredProducts = [
   {
@@ -114,6 +117,8 @@ const dummyProjects = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
