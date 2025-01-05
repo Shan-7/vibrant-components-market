@@ -42,12 +42,7 @@ const ProductCard = ({ id, name, price, image, category, product }: ProductCardP
           <h3 className="text-lg font-medium text-gray-900 mb-1">{name}</h3>
           <p className="text-sm text-gray-500 mb-3">{category}</p>
           <div className="flex items-center justify-between">
-            <div className="flex flex-col">
-              <span className="text-lg font-bold text-gray-900">₹{price}</span>
-              {product?.originalPrice && (
-                <span className="text-sm text-gray-500 line-through">₹{product.originalPrice}</span>
-              )}
-            </div>
+            <span className="text-lg font-bold text-gray-900">₹{price}</span>
             <Button 
               onClick={handleAddToCart}
               className="bg-gray-900 hover:bg-gray-800 text-white"
