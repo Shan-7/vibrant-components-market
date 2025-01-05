@@ -7,6 +7,7 @@ import { Package, Users, Upload, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { ProjectCard } from "../components/projects/ProjectCard";
+import ContactSection from "../components/contact/ContactSection";
 
 const featuredProducts = [
   {
@@ -197,29 +198,7 @@ const Index = () => {
       </section>
 
       {/* Contact & Address Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
-              <div className="space-y-2">
-                <p>Email: support@brickelectronics.com</p>
-                <p>Phone: +1 (555) 123-4567</p>
-                <p>Hours: Mon-Fri 9:00 AM - 6:00 PM EST</p>
-              </div>
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold mb-4">Our Location</h2>
-              <div className="space-y-2">
-                <p>123 Tech Street</p>
-                <p>Innovation District</p>
-                <p>Silicon Valley, CA 94025</p>
-                <p>United States</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactSection />
     </div>
   );
 };

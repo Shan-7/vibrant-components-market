@@ -18,12 +18,13 @@ const Wishlist = lazy(() => import("./pages/Wishlist"));
 const Profile = lazy(() => import("./pages/Profile"));
 const OrderHistory = lazy(() => import("./pages/OrderHistory"));
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard"));
+const ThreeDPrinting = lazy(() => import("./pages/ThreeDPrinting"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000, // 1 minute
-      gcTime: 5 * 60 * 1000, // 5 minutes (previously cacheTime)
+      staleTime: 60 * 1000,
+      gcTime: 5 * 60 * 1000,
     },
   },
 });
@@ -52,6 +53,7 @@ const App = () => (
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/orders" element={<OrderHistory />} />
                   <Route path="/admin" element={<AdminDashboard />} />
+                  <Route path="/3d-printing" element={<ThreeDPrinting />} />
                 </Routes>
               </Suspense>
             </BrowserRouter>
