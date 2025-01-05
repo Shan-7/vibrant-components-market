@@ -1,4 +1,4 @@
-import { ShoppingCart, Menu, Search, Heart } from "lucide-react";
+import { ShoppingCart, Menu, Search, User } from "lucide-react";
 import { Button } from "./ui/button";
 import { useCart } from "../context/CartContext";
 import { Link, useNavigate } from "react-router-dom";
@@ -19,82 +19,66 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-white/10">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-8">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b">
+      <div className="container mx-auto px-4">
+        {/* Top bar */}
+        <div className="flex items-center justify-between py-2 border-b">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-10 w-10 relative">
-              <svg viewBox="0 0 40 40" className="w-full h-full">
-                <path
-                  d="M20 0L40 10V30L20 40L0 30V10L20 0Z"
-                  fill="#0EA5E9"
-                  className="animate-pulse"
-                />
-                <path
-                  d="M20 4L36 12V28L20 36L4 28V12L20 4Z"
-                  fill="#33C3F0"
-                />
-                <path
-                  d="M20 8L32 14V26L20 32L8 26V14L20 8Z"
-                  fill="#F97316"
-                />
-                <text
-                  x="20"
-                  y="24"
-                  fontSize="12"
-                  fontWeight="bold"
-                  fill="white"
-                  textAnchor="middle"
-                >
-                  BE
-                </text>
-              </svg>
+            <div className="h-16 w-16">
+              <img src="/brick-electronics-logo.png" alt="Brick Electronics" className="w-full h-full object-contain" />
             </div>
-            <span className="text-xl font-bold text-white">Brick Electronics</span>
           </Link>
-          <nav className="hidden md:flex gap-6">
-            <Link to="/components" className="text-muted hover:text-white transition-colors">Components</Link>
-            <Link to="/category/all" className="text-muted hover:text-white transition-colors">Categories</Link>
-            <Link to="/projects" className="text-muted hover:text-white transition-colors">Projects</Link>
-            <Link to="/3d-printing" className="text-muted hover:text-white transition-colors">3D Printing</Link>
-          </nav>
-        </div>
-        
-        <div className="hidden md:flex items-center gap-4 flex-1 max-w-xl mx-8">
-          <form onSubmit={handleSearch} className="flex-1 flex gap-2">
-            <Input
-              type="search"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="flex-1"
-            />
-            <Button type="submit" variant="secondary">
-              <Search className="w-4 h-4" />
+          
+          <div className="flex-1 max-w-xl mx-8">
+            <form onSubmit={handleSearch} className="flex gap-2">
+              <Input
+                type="search"
+                placeholder="Search product"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="flex-1 bg-gray-100"
+              />
+              <Button type="submit" variant="ghost" size="icon">
+                <Search className="w-5 h-5" />
+              </Button>
+            </form>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <Button variant="ghost" size="icon">
+              <User className="w-5 h-5" />
             </Button>
-          </form>
+            <Link to="/cart" className="flex items-center gap-2">
+              <Button variant="ghost" size="icon" className="relative">
+                <ShoppingCart className="w-5 h-5" />
+                {cartItemsCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    {cartItemsCount}
+                  </span>
+                )}
+              </Button>
+              <span className="hidden md:inline">Cart ({cartItemsCount})</span>
+            </Link>
+          </div>
         </div>
 
-        <div className="flex items-center gap-4">
-          <Link to="/wishlist">
-            <Button variant="ghost" size="icon">
-              <Heart className="w-5 h-5" />
-            </Button>
-          </Link>
-          <Link to="/cart">
-            <Button variant="ghost" size="icon" className="relative">
-              <ShoppingCart className="w-5 h-5" />
-              {cartItemsCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-accent text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
-                  {cartItemsCount}
-                </span>
-              )}
-            </Button>
-          </Link>
+        {/* Navigation */}
+        <nav className="flex items-center justify-between h-12">
+          <div className="hidden md:flex items-center gap-8">
+            <Link to="/" className="text-gray-700 hover:text-gray-900">HOME</Link>
+            <Link to="/shop" className="text-gray-700 hover:text-gray-900">SHOP</Link>
+            <Link to="/about" className="text-gray-700 hover:text-gray-900">ABOUT</Link>
+            <Link to="/contact" className="text-gray-700 hover:text-gray-900">CONTACT US</Link>
+            <Link to="/b2b" className="text-gray-700 hover:text-gray-900">B2B</Link>
+            <Link to="/blog" className="text-gray-700 hover:text-gray-900">BLOGS</Link>
+          </div>
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="w-5 h-5" />
           </Button>
-        </div>
+          <div className="hidden md:block">
+            <span className="text-sm">Customer Service: +91 9370566844</span>
+          </div>
+        </nav>
       </div>
     </header>
   );

@@ -29,27 +29,31 @@ const ProductCard = ({ id, name, price, image, category, product }: ProductCardP
   };
 
   return (
-    <Link to={`/product/${id}`} className="max-w-[280px]">
-      <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group animate-fade-in">
-        <div className="aspect-square overflow-hidden rounded-t-lg">
+    <Link to={`/product/${id}`}>
+      <Card className="bg-white border hover:shadow-lg transition-shadow duration-300">
+        <div className="aspect-square overflow-hidden">
           <img
             src={image}
             alt={name}
-            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
           />
         </div>
-        <div className="p-3">
-          <p className="text-xs text-muted uppercase tracking-wider">{category}</p>
-          <h3 className="text-base font-semibold mt-1 line-clamp-1">{name}</h3>
-          <div className="flex items-center justify-between mt-3">
-            <p className="text-lg font-bold text-primary">${price}</p>
+        <div className="p-4">
+          <h3 className="text-lg font-medium text-gray-900 mb-1">{name}</h3>
+          <p className="text-sm text-gray-500 mb-3">{category}</p>
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span className="text-lg font-bold text-gray-900">₹{price}</span>
+              {product?.originalPrice && (
+                <span className="text-sm text-gray-500 line-through">₹{product.originalPrice}</span>
+              )}
+            </div>
             <Button 
-              size="sm" 
-              className="bg-primary hover:bg-primary/80 text-sm py-1" 
               onClick={handleAddToCart}
+              className="bg-gray-900 hover:bg-gray-800 text-white"
             >
-              <ShoppingCart className="w-3 h-3 mr-1" />
-              Add
+              <ShoppingCart className="w-4 h-4 mr-2" />
+              Add to Cart
             </Button>
           </div>
         </div>

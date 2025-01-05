@@ -14,12 +14,12 @@ export const HeroSection = () => {
   };
 
   return (
-    <section className="pt-32 pb-16 px-4">
+    <section className="pt-32 pb-16 px-4 bg-white">
       <div className="container mx-auto text-center">
-        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#0EA5E9] via-[#33C3F0] to-[#0FA0CE] bg-clip-text text-transparent">
+        <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] bg-clip-text text-transparent">
           Welcome to Brick Electronics
         </h1>
-        <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
+        <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
           Your premier destination for Arduino, Raspberry Pi, and cutting-edge electronic components.
         </p>
         <form onSubmit={handleSearch} className="max-w-xl mx-auto flex gap-2 mb-8">
@@ -28,9 +28,9 @@ export const HeroSection = () => {
             placeholder="Search for products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="bg-white/5"
+            className="bg-gray-100"
           />
-          <Button type="submit" className="bg-primary hover:bg-primary/90">
+          <Button type="submit" className="bg-gray-900 hover:bg-gray-800 text-white">
             <SearchIcon className="w-4 h-4 mr-2" />
             Search
           </Button>
