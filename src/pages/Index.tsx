@@ -1,13 +1,11 @@
 import Header from "../components/Header";
-import ProductCard from "../components/ProductCard";
-import CategoryCard from "../components/CategoryCard";
-import { NewsletterSignup } from "../components/marketing/NewsletterSignup";
-import { HeroSection } from "../components/hero/HeroSection";
-import { Package, Users, Upload, Wrench } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
-import { ProjectCard } from "../components/projects/ProjectCard";
+import { WelcomeSection } from "../components/home/WelcomeSection";
+import { FeaturedSection } from "../components/home/FeaturedSection";
+import { CategoriesSection } from "../components/home/CategoriesSection";
+import { ThemeToggle } from "../components/theme/ThemeToggle";
 import ContactSection from "../components/contact/ContactSection";
+import { NewsletterSignup } from "../components/marketing/NewsletterSignup";
+import { ProjectCard } from "../components/projects/ProjectCard";
 
 const featuredProducts = [
   {
@@ -116,72 +114,47 @@ const dummyProjects = [
 ];
 
 const Index = () => {
-  const navigate = useNavigate();
-
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <HeroSection />
-
+      <ThemeToggle />
+      <WelcomeSection />
+      
       {/* Quick Options */}
       <section className="py-8 bg-white/5">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/bulk-order")}>
-              <Package className="w-8 h-8 mb-2" />
-              <span>Bulk Orders</span>
-            </Button>
-            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/careers")}>
-              <Users className="w-8 h-8 mb-2" />
-              <span>Careers</span>
-            </Button>
-            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/3d-printing")}>
-              <Upload className="w-8 h-8 mb-2" />
-              <span>3D Printing</span>
-            </Button>
-            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/kits")}>
-              <Wrench className="w-8 h-8 mb-2" />
-              <span>DIY Kits</span>
-            </Button>
+          <div className="bg-white/5 backdrop-blur-sm border border-violet-100 dark:border-violet-900 rounded-lg p-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/bulk-order")}>
+                <Package className="w-8 h-8 mb-2" />
+                <span>Bulk Orders</span>
+              </Button>
+              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/careers")}>
+                <Users className="w-8 h-8 mb-2" />
+                <span>Careers</span>
+              </Button>
+              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/3d-printing")}>
+                <Upload className="w-8 h-8 mb-2" />
+                <span>3D Printing</span>
+              </Button>
+              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/kits")}>
+                <Wrench className="w-8 h-8 mb-2" />
+                <span>DIY Kits</span>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Products Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {featuredProducts.map((product) => (
-              <ProductCard
-                key={product.id}
-                id={product.id}
-                name={product.name}
-                price={product.price}
-                image={product.image}
-                category={product.category}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories Section */}
-      <section className="py-16 px-4 bg-white/5">
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-8">Browse Categories</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {categories.map((category, index) => (
-              <CategoryCard key={index} {...category} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <FeaturedSection products={featuredProducts} />
+      <CategoriesSection categories={categories} />
 
       {/* Projects Showcase */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
+          <div className="bg-white/5 backdrop-blur-sm border border-violet-100 dark:border-violet-900 rounded-lg p-6 mb-8">
+            <h2 className="text-3xl font-bold mb-8 text-foreground">Featured Projects</h2>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {dummyProjects.map((project) => (
               <ProjectCard key={project.id} {...project} />
@@ -193,11 +166,12 @@ const Index = () => {
       {/* Newsletter Section */}
       <section className="py-16 px-4 bg-white/5">
         <div className="container mx-auto max-w-4xl">
-          <NewsletterSignup />
+          <div className="bg-white/5 backdrop-blur-sm border border-violet-100 dark:border-violet-900 rounded-lg p-6">
+            <NewsletterSignup />
+          </div>
         </div>
       </section>
 
-      {/* Contact & Address Section */}
       <ContactSection />
     </div>
   );
