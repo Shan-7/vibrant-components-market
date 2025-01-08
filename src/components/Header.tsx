@@ -25,7 +25,7 @@ const Header = () => {
         <div className="flex items-center justify-between py-2 border-b">
           <Link to="/" className="flex items-center gap-2">
             <div className="h-16 w-16">
-              <img src="/brick-electronics-logo.png" alt="Brick Electronics" className="w-full h-full object-contain" />
+              <img src="/ivonix-labs-logo.png" alt="Ivonix Labs" className="w-full h-full object-contain" />
             </div>
           </Link>
           

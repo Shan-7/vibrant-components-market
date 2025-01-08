@@ -6,7 +6,7 @@ const ContactSection = () => {
           <div>
             <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
             <div className="space-y-2">
-              <p>Email: brickelectronics1@gmail.com</p>
+              <p>Email: ivonixlabs@gmail.com</p>
               <p>Phone: +91 9370566844</p>
               <p>Hours: Mon-Fri 9:00 AM - 6:00 PM IST</p>
             </div>

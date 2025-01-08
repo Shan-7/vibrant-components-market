@@ -17,7 +17,7 @@ export const HeroSection = () => {
     <section className="pt-32 pb-16 px-4 bg-white">
       <div className="container mx-auto text-center">
         <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#9b87f5] via-[#7E69AB] to-[#6E59A5] bg-clip-text text-transparent">
-          Welcome to Brick Electronics
+          Welcome to Ivonix Labs
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
           Your premier destination for Arduino, Raspberry Pi, and cutting-edge electronic components.
