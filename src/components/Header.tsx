@@ -18,68 +18,81 @@ const Header = () => {
     }
   };
 
+  const categories = [
+    "NVIDIA® Jetson",
+    "Raspberry Pi",
+    "BeagleBoard®",
+    "Arduino",
+    "XIAO",
+    "Meshtastic",
+    "Grove",
+    "LoRaWAN®",
+    "Home Assistant",
+    "Decentralize",
+  ];
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white border-b">
-      <div className="container mx-auto px-4">
-        {/* Top bar */}
-        <div className="flex items-center justify-between py-2 border-b">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
+      <div className="container mx-auto">
+        {/* Main header */}
+        <div className="flex items-center justify-between py-4 px-4">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-16 w-16">
-              <img src="/ivonix-labs-logo.png" alt="Ivonix Labs Store" className="w-full h-full object-contain" />
-            </div>
-            <span className="text-xl font-bold text-gray-900">Ivonix Labs Store</span>
+            <img src="/ivonix-labs-logo.png" alt="Ivonix Labs Store" className="h-8" />
           </Link>
-          
-          <div className="flex-1 max-w-xl mx-8">
-            <form onSubmit={handleSearch} className="flex gap-2">
-              <Input
-                type="search"
-                placeholder="Search product"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 bg-gray-100"
-              />
-              <Button type="submit" variant="ghost" size="icon">
-                <Search className="w-5 h-5" />
-              </Button>
-            </form>
-          </div>
+
+          <nav className="hidden lg:flex items-center gap-8">
+            <div className="relative group">
+              <Button variant="ghost">Products</Button>
+            </div>
+            <Button variant="ghost">Documents</Button>
+            <Button variant="ghost">Service</Button>
+            <Button variant="ghost">Solution</Button>
+            <Button variant="ghost">Support</Button>
+          </nav>
 
           <div className="flex items-center gap-4">
+            <form onSubmit={handleSearch} className="hidden md:flex">
+              <Input
+                type="search"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-64"
+              />
+            </form>
+            <Button variant="ghost" size="icon">
+              <Search className="w-5 h-5" />
+            </Button>
             <Button variant="ghost" size="icon">
               <User className="w-5 h-5" />
             </Button>
-            <Link to="/cart" className="flex items-center gap-2">
+            <Link to="/cart">
               <Button variant="ghost" size="icon" className="relative">
                 <ShoppingCart className="w-5 h-5" />
                 {cartItemsCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 bg-green-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
                     {cartItemsCount}
                   </span>
                 )}
               </Button>
-              <span className="hidden md:inline">Cart ({cartItemsCount})</span>
             </Link>
           </div>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex items-center justify-between h-12">
-          <div className="hidden md:flex items-center gap-8">
-            <Link to="/" className="text-gray-700 hover:text-gray-900">HOME</Link>
-            <Link to="/shop" className="text-gray-700 hover:text-gray-900">SHOP</Link>
-            <Link to="/about" className="text-gray-700 hover:text-gray-900">ABOUT</Link>
-            <Link to="/contact" className="text-gray-700 hover:text-gray-900">CONTACT US</Link>
-            <Link to="/b2b" className="text-gray-700 hover:text-gray-900">B2B</Link>
-            <Link to="/blog" className="text-gray-700 hover:text-gray-900">BLOGS</Link>
+        {/* Categories bar */}
+        <div className="border-t overflow-x-auto">
+          <div className="flex items-center gap-4 px-4 py-2 min-w-max">
+            {categories.map((category) => (
+              <Link
+                key={category}
+                to={`/category/${category.toLowerCase()}`}
+                className="text-sm px-4 py-1 rounded-full border border-green-100 hover:bg-green-50 transition-colors"
+              >
+                {category}
+              </Link>
+            ))}
           </div>
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="w-5 h-5" />
-          </Button>
-          <div className="hidden md:block">
-            <span className="text-sm">Customer Service: +91 9370566844</span>
-          </div>
-        </nav>
+        </div>
       </div>
     </header>
   );

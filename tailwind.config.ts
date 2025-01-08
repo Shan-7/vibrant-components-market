@@ -25,9 +25,9 @@ export default {
         background: "#FFFFFF",
         foreground: "#1A1F2C",
         primary: {
-          DEFAULT: "#9b87f5",
+          DEFAULT: "#16A34A",
           foreground: "#FFFFFF",
-          hover: "#8B5CF6",
+          hover: "#15803D",
         },
         secondary: {
           DEFAULT: "#7E69AB",
@@ -42,8 +42,8 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(111.4deg, #9b87f5 1%, #7E69AB 58%)',
-        'gradient-secondary': 'linear-gradient(90deg, #8B5CF6 0%, #D6BCFA 100%)',
+        'gradient-primary': 'linear-gradient(111.4deg, #16A34A 1%, #15803D 58%)',
+        'gradient-secondary': 'linear-gradient(90deg, #15803D 0%, #16A34A 100%)',
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",

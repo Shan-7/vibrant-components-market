@@ -12,10 +12,12 @@ interface ProductCardProps {
   price: number;
   image: string;
   category: string;
+  sku?: string;
+  originalPrice?: number;
   product?: Product;
 }
 
-const ProductCard = ({ id, name, price, image, category, product }: ProductCardProps) => {
+const ProductCard = ({ id, name, price, image, category, sku, originalPrice, product }: ProductCardProps) => {
   const { addToCart } = useCart();
   const { toast } = useToast();
 
@@ -28,28 +30,38 @@ const ProductCard = ({ id, name, price, image, category, product }: ProductCardP
     });
   };
 
+  const discount = originalPrice ? Math.round(((originalPrice - price) / originalPrice) * 100) : 0;
+
   return (
     <Link to={`/product/${id}`}>
-      <Card className="bg-white border hover:shadow-lg transition-shadow duration-300">
-        <div className="aspect-square overflow-hidden">
-          <img
-            src={image}
-            alt={name}
-            className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-300"
-          />
+      <Card className="group overflow-hidden bg-white hover:shadow-lg transition-shadow duration-300">
+        <div className="relative">
+          {category && (
+            <span className="absolute top-2 left-2 bg-green-600 text-white text-xs px-2 py-1 rounded">
+              {category}
+            </span>
+          )}
+          <div className="aspect-[4/3] overflow-hidden">
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+            />
+          </div>
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-medium text-gray-900 mb-1">{name}</h3>
-          <p className="text-sm text-gray-500 mb-3">{category}</p>
-          <div className="flex items-center justify-between">
-            <span className="text-lg font-bold text-gray-900">₹{price}</span>
-            <Button 
-              onClick={handleAddToCart}
-              className="bg-gray-900 hover:bg-gray-800 text-white"
-            >
-              <ShoppingCart className="w-4 h-4 mr-2" />
-              Add to Cart
-            </Button>
+          {sku && <p className="text-xs text-gray-500 mb-1">SKU {sku}</p>}
+          <h3 className="text-lg font-medium text-gray-900 mb-2 line-clamp-2">{name}</h3>
+          <div className="flex items-center justify-between mt-auto">
+            <div className="flex items-baseline gap-2">
+              <span className="text-xl font-bold text-gray-900">${price.toFixed(2)}</span>
+              {originalPrice && (
+                <>
+                  <span className="text-sm text-gray-500 line-through">${originalPrice.toFixed(2)}</span>
+                  <span className="text-sm text-green-600">({discount}% OFF)</span>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </Card>
