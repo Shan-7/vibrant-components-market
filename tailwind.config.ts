@@ -22,33 +22,28 @@ export default {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "#FFFFFF",
-        foreground: "#1A1F2C",
+        background: "#1A1F2C",
+        foreground: "#FFFFFF",
         primary: {
-          DEFAULT: "#16A34A",
+          DEFAULT: "#0EA5E9",
           foreground: "#FFFFFF",
-          hover: "#15803D",
         },
         secondary: {
-          DEFAULT: "#7E69AB",
+          DEFAULT: "#33C3F0",
           foreground: "#FFFFFF",
-          hover: "#6E59A5",
         },
         muted: {
-          DEFAULT: "#6E59A5",
+          DEFAULT: "#8E9196",
           foreground: "#FFFFFF",
-          hover: "#D6BCFA",
         },
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-primary': 'linear-gradient(111.4deg, #16A34A 1%, #15803D 58%)',
-        'gradient-secondary': 'linear-gradient(90deg, #15803D 0%, #16A34A 100%)',
+        accent: {
+          DEFAULT: "#F97316",
+          foreground: "#FFFFFF",
+        }
       },
       animation: {
         "fade-in": "fade-in 0.5s ease-out",
         "slide-in": "slide-in 0.5s ease-out",
-        "slide-up": "slide-up 0.5s ease-out",
       },
       keyframes: {
         "fade-in": {
@@ -58,10 +53,6 @@ export default {
         "slide-in": {
           "0%": { transform: "translateX(-20px)", opacity: "0" },
           "100%": { transform: "translateX(0)", opacity: "1" },
-        },
-        "slide-up": {
-          "0%": { transform: "translateY(20px)", opacity: "0" },
-          "100%": { transform: "translateY(0)", opacity: "1" },
         },
       },
     },

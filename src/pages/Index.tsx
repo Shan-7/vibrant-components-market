@@ -1,14 +1,13 @@
 import Header from "../components/Header";
-import { WelcomeSection } from "../components/home/WelcomeSection";
-import { FeaturedSection } from "../components/home/FeaturedSection";
-import { CategoriesSection } from "../components/home/CategoriesSection";
-import { ThemeToggle } from "../components/theme/ThemeToggle";
-import ContactSection from "../components/contact/ContactSection";
+import ProductCard from "../components/ProductCard";
+import CategoryCard from "../components/CategoryCard";
 import { NewsletterSignup } from "../components/marketing/NewsletterSignup";
-import { ProjectCard } from "../components/projects/ProjectCard";
-import { Button } from "@/components/ui/button";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Search as SearchIcon, Truck, Package, Users, Upload, Wrench } from "lucide-react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Package, Users, Upload, Wrench } from "lucide-react";
+import { ProjectCard } from "../components/projects/ProjectCard";
 
 const featuredProducts = [
   {
@@ -117,49 +116,102 @@ const dummyProjects = [
 ];
 
 const Index = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />
-      <ThemeToggle />
-      <WelcomeSection />
       
+      {/* Hero Section with Search */}
+      <section className="pt-32 pb-16 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#8B4513] via-[#A0522D] to-[#D2691E] bg-clip-text text-transparent">
+            Welcome to Brick Electronics
+          </h1>
+          <p className="text-xl text-muted max-w-2xl mx-auto mb-8">
+            Your premier destination for Arduino, Raspberry Pi, and cutting-edge electronic components.
+          </p>
+          <form onSubmit={handleSearch} className="max-w-xl mx-auto flex gap-2 mb-8">
+            <Input
+              type="search"
+              placeholder="Search for products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-white/5"
+            />
+            <Button type="submit" className="bg-primary hover:bg-primary/90">
+              <SearchIcon className="w-4 h-4 mr-2" />
+              Search
+            </Button>
+          </form>
+        </div>
+      </section>
+
       {/* Quick Options */}
       <section className="py-8 bg-white/5">
         <div className="container mx-auto px-4">
-          <div className="bg-white/5 backdrop-blur-sm border border-violet-100 dark:border-violet-900 rounded-lg p-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/bulk-order")}>
-                <Package className="w-8 h-8 mb-2" />
-                <span>Bulk Orders</span>
-              </Button>
-              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/careers")}>
-                <Users className="w-8 h-8 mb-2" />
-                <span>Careers</span>
-              </Button>
-              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/3d-printing")}>
-                <Upload className="w-8 h-8 mb-2" />
-                <span>3D Printing</span>
-              </Button>
-              <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/kits")}>
-                <Wrench className="w-8 h-8 mb-2" />
-                <span>DIY Kits</span>
-              </Button>
-            </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/bulk-order")}>
+              <Package className="w-8 h-8 mb-2" />
+              <span>Bulk Orders</span>
+            </Button>
+            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/careers")}>
+              <Users className="w-8 h-8 mb-2" />
+              <span>Careers</span>
+            </Button>
+            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/3d-printing")}>
+              <Upload className="w-8 h-8 mb-2" />
+              <span>3D Printing</span>
+            </Button>
+            <Button variant="ghost" className="flex flex-col items-center p-6" onClick={() => navigate("/kits")}>
+              <Wrench className="w-8 h-8 mb-2" />
+              <span>DIY Kits</span>
+            </Button>
           </div>
         </div>
       </section>
 
-      <FeaturedSection products={featuredProducts} />
-      <CategoriesSection categories={categories} />
+      {/* Featured Products Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Featured Products</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featuredProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                id={product.id}
+                name={product.name}
+                price={product.price}
+                image={product.image}
+                category={product.category}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-16 px-4 bg-white/5">
+        <div className="container mx-auto">
+          <h2 className="text-3xl font-bold mb-8">Browse Categories</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {categories.map((category, index) => (
+              <CategoryCard key={index} {...category} />
+            ))}
+          </div>
+        </div>
+      </section>
 
       {/* Projects Showcase */}
       <section className="py-16 px-4">
         <div className="container mx-auto">
-          <div className="bg-white/5 backdrop-blur-sm border border-violet-100 dark:border-violet-900 rounded-lg p-6 mb-8">
-            <h2 className="text-3xl font-bold mb-8 text-foreground">Featured Projects</h2>
-          </div>
+          <h2 className="text-3xl font-bold mb-8">Featured Projects</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {dummyProjects.map((project) => (
               <ProjectCard key={project.id} {...project} />
@@ -171,13 +223,34 @@ const Index = () => {
       {/* Newsletter Section */}
       <section className="py-16 px-4 bg-white/5">
         <div className="container mx-auto max-w-4xl">
-          <div className="bg-white/5 backdrop-blur-sm border border-violet-100 dark:border-violet-900 rounded-lg p-6">
-            <NewsletterSignup />
-          </div>
+          <NewsletterSignup />
         </div>
       </section>
 
-      <ContactSection />
+      {/* Contact & Address Section */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Contact Us</h2>
+              <div className="space-y-2">
+                <p>Email: support@brickelectronics.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Hours: Mon-Fri 9:00 AM - 6:00 PM EST</p>
+              </div>
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Our Location</h2>
+              <div className="space-y-2">
+                <p>123 Tech Street</p>
+                <p>Innovation District</p>
+                <p>Silicon Valley, CA 94025</p>
+                <p>United States</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };
