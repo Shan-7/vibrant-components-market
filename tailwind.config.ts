@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -19,25 +20,25 @@ export default {
     },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "#1A1F2C",
-        foreground: "#FFFFFF",
+        border: "#E5E7EB",
+        input: "#E5E7EB",
+        ring: "#93C5FD",
+        background: "#FFFFFF",
+        foreground: "#111827",
         primary: {
-          DEFAULT: "#0EA5E9",
+          DEFAULT: "#3B82F6",
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#33C3F0",
+          DEFAULT: "#10B981",
           foreground: "#FFFFFF",
         },
         muted: {
-          DEFAULT: "#8E9196",
+          DEFAULT: "#6B7280",
           foreground: "#FFFFFF",
         },
         accent: {
-          DEFAULT: "#F97316",
+          DEFAULT: "#F59E0B",
           foreground: "#FFFFFF",
         }
       },

@@ -1,3 +1,4 @@
+
 import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { ShoppingCart } from "lucide-react";
@@ -30,8 +31,8 @@ const ProductCard = ({ id, name, price, image, category, product }: ProductCardP
 
   return (
     <Link to={`/product/${id}`} className="max-w-[280px]">
-      <Card className="bg-white/5 border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group animate-fade-in">
-        <div className="aspect-square overflow-hidden rounded-t-lg">
+      <Card className="bg-white border border-gray-200 shadow-sm hover:shadow-md transition-shadow group animate-fade-in">
+        <div className="aspect-square overflow-hidden rounded-t-lg bg-gray-50">
           <img
             src={image}
             alt={name}
@@ -39,8 +40,8 @@ const ProductCard = ({ id, name, price, image, category, product }: ProductCardP
           />
         </div>
         <div className="p-3">
-          <p className="text-xs text-muted uppercase tracking-wider">{category}</p>
-          <h3 className="text-base font-semibold mt-1 line-clamp-1">{name}</h3>
+          <p className="text-xs text-gray-500 uppercase tracking-wider">{category}</p>
+          <h3 className="text-base font-semibold mt-1 line-clamp-1 text-gray-800">{name}</h3>
           <div className="flex items-center justify-between mt-3">
             <p className="text-lg font-bold text-primary">${price}</p>
             <Button 
